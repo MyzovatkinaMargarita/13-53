@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "title": "Основы HTML",
+    "shortDescription": "Проверка базовых знаний HTML.",
+    "durationSec": 600,
+    "passScore": 70,
+    "attemptsAllowed": 3,
+    "allowRetry": true,
+    "isPublished": true,
+    "tags": ["html", "frontend"],
+    "meta": {
+      "project": "ПАЗЛ",
+      "track": "Frontend",
+      "course": "1 курс",
+      "purpose": "Проверка знаний"
+    },
+    "deadlineISO": null
+  },
+  {
+    "id": 2,
+    "title": "CSS Базовый",
+    "shortDescription": "Селекторы и базовые свойства.",
+    "durationSec": 900,
+    "passScore": 80,
+    "attemptsAllowed": 2,
+    "allowRetry": false,
+    "isPublished": true,
+    "tags": ["css", "frontend"],
+    "meta": {
+      "project": "КОД",
+      "track": "Frontend",
+      "course": "2 курс",
+      "purpose": "Проверка знаний"
+    },
+    "deadlineISO": "2026-10-05T00:00:00Z"
+  }
+]
