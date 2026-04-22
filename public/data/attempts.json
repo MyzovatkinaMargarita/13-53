@@ -1,0 +1,12 @@
+[
+  {
+    "id": 5001,
+    "testId": 1,
+    "userId": 1,
+    "startedAt": "2025-10-01T14:25:00Z",
+    "finishedAt": "2025-10-01T14:35:00Z",
+    "timeSpent": 600,
+    "score": 85,
+    "status": "graded"
+  }
+]
