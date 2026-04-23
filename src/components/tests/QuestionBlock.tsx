@@ -1,4 +1,4 @@
-// уроки 27, 28, 30, 34
+// уроки 27, 28, 30, 34, 52
 /** @jsxImportSource @emotion/react */
 import styled from "@emotion/styled";
 import type { AttemptReviewItemDto } from "../../api/data-contracts";
@@ -13,6 +13,7 @@ export type Question = {
   options?: string[];
   score: number;
   shuffle?: boolean;
+  correct?: string | string[]; // добавлено для подсветки
 };
 
 export type CheckResult = {
@@ -130,8 +131,16 @@ function getOptionState(
   return undefined;
 }
 
-export default function QuestionBlock({ index, question, value, result, showResult = false, reviewItem, onChange }: Props) {
-  const { id, type, text, options = [], score } = question;
+export default function QuestionBlock({
+  index,
+  question,
+  value,
+  result,
+  showResult = false,
+  reviewItem,
+  onChange,
+}: Props) {
+  const { id, type, text, options = [], score, correct } = question;
   const visibleOptions = options; // здесь можно добавить shuffle позже
 
   return (
@@ -153,7 +162,7 @@ export default function QuestionBlock({ index, question, value, result, showResu
       {type === "single" && (
         <Options>
           {visibleOptions.map((opt, i) => {
-            const state = getOptionState(opt, type, value, (question as any).correct, showResult);
+            const state = getOptionState(opt, type, value, correct, showResult);
             return (
               <li key={i}>
                 <OptionLabel state={state}>
@@ -178,7 +187,7 @@ export default function QuestionBlock({ index, question, value, result, showResu
           {visibleOptions.map((opt) => {
             const arr = Array.isArray(value) ? value : [];
             const checked = arr.includes(opt);
-            const state = getOptionState(opt, type, value, (question as any).correct, showResult);
+            const state = getOptionState(opt, type, value, correct, showResult);
             return (
               <li key={opt}>
                 <OptionLabel state={state}>
@@ -186,7 +195,9 @@ export default function QuestionBlock({ index, question, value, result, showResu
                     type="checkbox"
                     checked={checked}
                     onChange={() => {
-                      const next = checked ? arr.filter((v) => v !== opt) : [...arr, opt];
+                      const next = checked
+                        ? arr.filter((v) => v !== opt)
+                        : [...arr, opt];
                       onChange(id, next);
                     }}
                     disabled={showResult}
@@ -201,7 +212,9 @@ export default function QuestionBlock({ index, question, value, result, showResu
 
       <Score>
         {result ? `${result.earned} / ${score}` : score} балл
-        {reviewItem && reviewItem.earned !== undefined && ` (сервер: ${reviewItem.earned})`}
+        {reviewItem &&
+          reviewItem.earned !== undefined &&
+          ` (сервер: ${reviewItem.earned})`}
       </Score>
     </Box>
   );
